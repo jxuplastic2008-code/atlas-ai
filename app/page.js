@@ -1,14 +1,147 @@
-import Link from 'next/link';
 import Shell from '../components/Shell';
-import Signal from '../components/Signal';
 
-const watchlist = [['AVGO', 'Broadcom', 'Core', 'green'], ['NVDA', 'NVIDIA', 'Compute', 'green'], ['ETN', 'Eaton', 'Power', 'green'], ['VRT', 'Vertiv', 'Cooling', 'green'], ['PWR', 'Quanta Services', 'Grid', 'yellow'], ['SMR', 'NuScale Power', 'Long-term', 'yellow']];
-const stages = ['Compute', 'Memory', 'Networking', 'Cooling', 'Power', 'Grid', 'Generation'];
+const watchlist = [
+  ['AVGO', 'Broadcom', '核心'],
+  ['NVDA', 'NVIDIA', '计算'],
+  ['ETN', 'Eaton', '电力'],
+  ['VRT', 'Vertiv', '冷却'],
+  ['PWR', 'Quanta', '电网']
+];
+
+const stages = [
+  '计算',
+  '存储',
+  '网络',
+  '冷却',
+  '电力',
+  '电网',
+  '能源'
+];
 
 export default function Dashboard() {
-  return <Shell><div className="flex flex-wrap items-end justify-between gap-4"><div><p className="eyebrow">Research dashboard</p><h1 className="mt-1 text-3xl font-bold tracking-tight">AI Industrial Landscape</h1><p className="mt-2 text-sm text-slate-400">A quiet dashboard for structural signals, not daily price noise.</p></div><p className="text-sm text-slate-500">Last reviewed: <span className="text-slate-300">Update this in AI Journal</span></p></div>
-    <section className="mt-7 grid gap-4 lg:grid-cols-3"><div className="panel lg:col-span-2"><p className="eyebrow">Atlas health score</p><div className="mt-4 flex items-end justify-between"><div><span className="text-6xl font-black text-emerald-300">88</span><span className="ml-2 text-slate-500">/ 100</span></div><Signal>Constructive</Signal></div><div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-800"><div className="h-full w-[88%] rounded-full bg-gradient-to-r from-emerald-500 to-cyan-300" /></div><p className="mt-4 text-sm leading-6 text-slate-400">The dashboard is a starting thesis, not live market data. Add verified journal entries before acting on any change.</p></div><div className="panel"><p className="eyebrow">Current bottleneck</p><h2 className="mt-3 text-2xl font-bold">Power density</h2><p className="mt-2 text-sm leading-6 text-slate-400">AI clusters need reliable power delivery and cooling before new generation fully matters.</p><Link href="/power" className="mt-5 inline-block text-sm font-bold text-emerald-300">Explore power →</Link></div></section>
-    <section className="mt-5 grid gap-4 lg:grid-cols-5"><div className="panel lg:col-span-3"><div className="flex items-center justify-between"><div><p className="eyebrow">Today&apos;s signal</p><h2 className="mt-2 text-xl font-bold">No live feed connected yet</h2></div><Signal status="yellow">Setup mode</Signal></div><p className="mt-3 max-w-2xl text-sm leading-6 text-slate-400">This deployment-ready v1 intentionally uses placeholders. In the next phase, connect trusted sources and save AI-reviewed summaries to the Journal rather than publishing unverified headlines.</p><Link href="/journal" className="mt-5 inline-block rounded-lg bg-emerald-400 px-4 py-2 text-sm font-bold text-[#071019]">Open AI Journal</Link></div><div className="panel lg:col-span-2"><p className="eyebrow">Core position</p><h2 className="mt-2 text-xl font-bold">Broadcom <span className="text-slate-500">AVGO</span></h2><div className="mt-4 flex gap-2"><Signal>Thesis intact</Signal><span className="rounded-full border border-slate-700 px-2.5 py-1 text-xs text-slate-400">Manual review</span></div><Link href="/broadcom" className="mt-5 inline-block text-sm font-bold text-emerald-300">Open research page →</Link></div></section>
-    <section className="mt-5 grid gap-4 xl:grid-cols-2"><div className="panel"><p className="eyebrow">Industry chain</p><div className="mt-5 flex flex-wrap gap-2">{stages.map((stage, i) => <div key={stage} className="flex items-center gap-2"><span className={`rounded-lg border px-3 py-2 text-sm ${stage === 'Power' ? 'border-emerald-400/40 bg-emerald-400/10 text-emerald-200' : 'border-slate-700 bg-slate-800/50 text-slate-300'}`}>{stage}</span>{i < stages.length - 1 && <span className="text-slate-600">→</span>}</div>)}</div><p className="mt-5 text-sm text-slate-500">Use this map to organize research, not to imply a fixed investment sequence.</p></div><div className="panel"><div className="flex items-center justify-between"><p className="eyebrow">Watchlist snapshot</p><Link href="/watchlist" className="text-sm text-emerald-300">All names →</Link></div><div className="mt-3 divide-y divide-slate-800">{watchlist.slice(0,4).map(([ticker, name, theme, status]) => <div key={ticker} className="flex items-center justify-between py-3"><div><b>{ticker}</b><span className="ml-2 text-sm text-slate-500">{name}</span></div><div className="flex items-center gap-3"><span className="hidden text-xs text-slate-500 sm:inline">{theme}</span><Signal status={status}>{status === 'green' ? 'Watch' : 'Early'}</Signal></div></div>)}</div></div></section>
-  </Shell>;
+  return (
+    <Shell>
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="eyebrow">研究仪表盘</p>
+          <h1 className="mt-1 text-3xl font-bold">
+            AI 工业版图
+          </h1>
+          <p className="mt-3">
+            用结构性信号研究人工智能产业链，而不是短期价格波动。
+          </p>
+        </div>
+
+        <div className="badge">
+          私人研究终端
+        </div>
+      </div>
+
+
+      <section className="mt-7 grid gap-4 lg:grid-cols-3">
+
+        <div className="panel lg:col-span-2">
+          <p className="eyebrow">
+            Atlas 健康评分
+          </p>
+
+          <div className="text-6xl font-bold mt-3">
+            88
+            <span className="text-lg"> /100</span>
+          </div>
+
+          <div className="mt-5 h-2 rounded-full bg-slate-700">
+            <div className="h-2 w-[88%] rounded-full bg-green-400"></div>
+          </div>
+
+          <p className="mt-5">
+            当前为研究模型，不代表实时市场数据。
+          </p>
+        </div>
+
+
+        <div className="panel">
+          <p className="eyebrow">
+            当前瓶颈
+          </p>
+
+          <h2 className="mt-4 text-2xl font-bold">
+            电力密度
+          </h2>
+
+          <p className="mt-3">
+            AI 数据中心需要可靠电力和散热能力。
+          </p>
+        </div>
+
+
+      </section>
+
+
+      <section className="mt-5 grid gap-4 lg:grid-cols-2">
+
+        <div className="panel">
+          <p className="eyebrow">
+            今日信号
+          </p>
+
+          <h2 className="mt-3 text-xl font-bold">
+            尚未连接实时数据
+          </h2>
+
+          <p className="mt-3">
+            当前版本使用研究占位信息。
+          </p>
+        </div>
+
+
+        <div className="panel">
+          <p className="eyebrow">
+            核心观察
+          </p>
+
+          {watchlist.map((item)=>(
+            <div
+              key={item[0]}
+              className="mt-3 flex justify-between"
+            >
+              <span>
+                {item[0]} {item[1]}
+              </span>
+
+              <span>
+                {item[2]}
+              </span>
+            </div>
+          ))}
+
+        </div>
+
+      </section>
+
+
+      <section className="mt-5 panel">
+
+        <p className="eyebrow">
+          产业链
+        </p>
+
+        <div className="mt-5 flex flex-wrap gap-3">
+
+        {stages.map(stage=>(
+          <span
+            key={stage}
+            className="rounded border border-slate-600 px-4 py-2"
+          >
+            {stage}
+          </span>
+        ))}
+
+        </div>
+
+      </section>
+
+
+    </Shell>
+  );
 }
