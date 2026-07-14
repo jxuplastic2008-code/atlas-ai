@@ -1,24 +1,57 @@
-import Link from 'next/link';
+import Shell from '../../components/Shell';
+import Signal from '../../components/Signal';
 
-const links = [
-  ['/', 'Dashboard'],
-  ['/journal', 'AI Journal'],
-  ['/watchlist', 'Watchlist'],
-  ['/broadcom', 'Broadcom'],
-  ['/power', 'Power'],
+const names = [
+  ['AVGO', 'Broadcom', 'ASIC、网络与基础设施软件 / ASIC, networking & infrastructure software', '核心研究 / Core research', 'green'],
+  ['NVDA', '英伟达 / NVIDIA', '加速计算 / Accelerated computing', '核心研究 / Core research', 'green'],
+  ['AMD', 'AMD', '计算与 AI 加速器 / Compute and AI accelerators', '执行观察 / Monitor execution', 'yellow'],
+  ['AMKR', '安靠科技 / Amkor Technology', '先进封装与测试 / Advanced packaging & test', '周期观察 / Cyclical watch', 'yellow'],
+  ['ETN', '伊顿 / Eaton', '电力分配与能源管理 / Electrical distribution & power management', '电力观察 / Power watch', 'green'],
+  ['VRT', '维谛技术 / Vertiv', '冷却与关键数字基础设施 / Cooling and critical digital infrastructure', '电力观察 / Power watch', 'green'],
+  ['PWR', 'Quanta Services', '输电与电网建设 / Transmission & grid construction', '电网观察 / Grid watch', 'yellow'],
+  ['GEV', 'GE Vernova', '发电与电网系统 / Generation and grid systems', '电网观察 / Grid watch', 'yellow'],
+  ['SMR', 'NuScale Power', '小型模块化反应堆发展 / Small modular reactor development', '长期观察 / Long horizon', 'yellow'],
 ];
 
-export default function Shell({ children, active = 'Dashboard' }) {
-  return <div className="min-h-screen bg-[#081019]">
-    <header className="border-b border-slate-800 bg-[#0a121c]/90 px-5 py-4 backdrop-blur md:px-10">
-      <div className="mx-auto flex max-w-7xl items-center justify-between">
-        <Link href="/" className="flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-xl bg-emerald-400 font-black text-[#071019]">A</span><span><b className="block tracking-wide">ATLAS AI</b><small className="text-xs text-slate-500">Industrial Intelligence</small></span></Link>
-        <span className="hidden rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300 sm:block">PRIVATE RESEARCH TERMINAL</span>
-      </div>
-    </header>
-    <div className="mx-auto grid max-w-7xl md:grid-cols-[190px_1fr]">
-      <aside className="border-b border-slate-800 p-3 md:min-h-[calc(100vh-73px)] md:border-b-0 md:border-r md:p-4"><nav className="flex gap-1 overflow-x-auto md:flex-col">{links.map(([href, name]) => <Link key={href} href={href} className={`nav-link whitespace-nowrap ${active === name ? 'nav-link-active' : ''}`}>{name}</Link>)}</nav><div className="mt-7 hidden border-t border-slate-800 pt-5 md:block"><p className="eyebrow">Research principle</p><p className="mt-2 text-sm leading-6 text-slate-400">Study the industrial bottleneck. Let price be a secondary signal.</p></div></aside>
-      <main className="min-w-0 p-5 md:p-8">{children}</main>
-    </div>
-  </div>;
+export default function Broadcom() {
+  return (
+    <Shell active="Broadcom">
+      <p className="eyebrow">
+        研究领域 / Research universe
+      </p>
+
+      <h1 className="mt-1 text-3xl font-bold">
+        博通产业链研究 / Broadcom Industrial Research
+      </h1>
+
+      <p className="mt-4">
+        跟踪 AI 基础设施、网络、ASIC、电力与数据中心产业链。
+        <br />
+        Tracking AI infrastructure, networking, ASIC, power and data center supply chains.
+      </p>
+
+      <section className="mt-7 grid gap-4">
+        {names.map((item) => (
+          <div key={item[0]} className="panel">
+
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-bold">
+                {item[0]} · {item[1]}
+              </h2>
+
+              <Signal tone={item[4]}>
+                {item[3]}
+              </Signal>
+            </div>
+
+            <p className="mt-3">
+              {item[2]}
+            </p>
+
+          </div>
+        ))}
+      </section>
+
+    </Shell>
+  );
 }
