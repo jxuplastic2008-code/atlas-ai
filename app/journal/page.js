@@ -2,10 +2,50 @@ import Shell from '../../components/Shell';
 import Signal from '../../components/Signal';
 
 const template = [
-  ['1. What changed?', 'Write only a verified event: company filing, earnings call, official announcement, or trusted reporting.'],
-  ['2. Which link in the chain?', 'Compute, memory, networking, cooling, power, grid, or generation.'],
-  ['3. What is the impact?', 'Identify the directly affected companies and distinguish facts from your inference.'],
-  ['4. What would falsify the thesis?', 'Record the condition that would make this interpretation wrong.']
+  ['1. 发生了什么变化？', '只记录经过验证的事件：公司公告、财报、官方声明或可信报告。'],
+  ['2. 影响产业链哪一环？', '计算、存储、网络、冷却、电力、电网或能源。'],
+  ['3. 影响是什么？', '识别直接受影响的公司，并区分事实与推测。'],
+  ['4. 什么情况会推翻判断？', '记录会让当前研究观点失效的条件。']
 ];
 
-export default function Journal() { return <Shell active="AI Journal"><p className="eyebrow">Private decision journal</p><h1 className="mt-1 text-3xl font-bold">AI Journal</h1><p className="mt-2 max-w-3xl text-sm leading-6 text-slate-400">A deliberately manual first version. Use it to record durable research conclusions; a future data layer can populate this page from approved sources.</p><section className="mt-7 panel"><div className="flex flex-wrap items-center justify-between gap-3"><div><p className="eyebrow">Latest entry placeholder</p><h2 className="mt-1 text-xl font-bold">Start with a verified industry event</h2></div><Signal status="yellow">Awaiting source</Signal></div><p className="mt-4 rounded-xl border border-dashed border-slate-700 bg-slate-950/20 p-5 text-sm leading-7 text-slate-400">Example: “A hyperscaler increases data-center capital expenditure.” Then separate the stated fact from your hypothesis about ASIC demand, power equipment backlog, or grid impact.</p></section><section className="mt-5 grid gap-4 md:grid-cols-2">{template.map(([title, body], index) => <article className="panel" key={title}><span className="text-sm font-black text-emerald-300">0{index + 1}</span><h2 className="mt-4 text-lg font-bold">{title}</h2><p className="mt-2 text-sm leading-6 text-slate-400">{body}</p></article>)}</section><section className="mt-5 panel"><p className="eyebrow">Journal rule</p><p className="mt-2 text-lg font-semibold">Do not write “the stock will rise.” Write what must happen operationally for the thesis to strengthen.</p></section></Shell>; }
+export default function Journal() {
+  return (
+    <Shell active="AI Journal">
+
+      <p className="eyebrow">
+        私人研究日志
+      </p>
+
+      <h1 className="mt-1 text-3xl font-bold">
+        AI 研究日志
+      </h1>
+
+      <p className="mt-4">
+        用结构化方式记录 AI 产业变化、关键事件和研究判断。
+      </p>
+
+
+      <section className="mt-7 grid gap-4">
+
+        {template.map((item)=>(
+          <div 
+            key={item[0]}
+            className="panel"
+          >
+            <h2 className="text-xl font-bold">
+              {item[0]}
+            </h2>
+
+            <p className="mt-3">
+              {item[1]}
+            </p>
+
+          </div>
+        ))}
+
+      </section>
+
+
+    </Shell>
+  );
+}
